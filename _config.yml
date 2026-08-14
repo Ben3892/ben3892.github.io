@@ -7,7 +7,7 @@
 # server process.
 
 # Basic Site Settings
-locale                   : "en-US"
+locale                   : "zh-CN"
 site_theme               : "default"
 title                    : "Your Name / Site Title"
 title_separator          : "-"
@@ -23,13 +23,15 @@ repository               : "academicpages/academicpages.github.io"
 author:
   # Biographic information
   avatar           : "profile.png"
-  name             : "Your Sidebar Name"
-  pronouns         : # example: "she/her"  
-  bio              : "Short biography for the left-hand sidebar"
-  location         : "Earth"
-  employer         : "Red Brick University"
-  uri              : # URL
-  email            : "none@example.org" 
+  name             : "Ben(Jiangan) Yuan"
+  bio: "大模型、训练优化与知识蒸馏研究"
+  location: "Beijing, China"
+  employer: "Baidu.inc"
+  email: "jianganyuan@link.cuhk.edu.cn"
+  github: "Ben3892"
+  googlescholar: "https://scholar.google.com/citations?hl=zh-CN&user=hUOpBWsAAAAJ&view_op=list_works&authuser=1&gmla=AKCpqFy9rSDcykHzHFW9D_67XS496ttJn0EHINUIbQZ6-OyJE2dlHSJWf-iyi9Q3-g33QpklfPRs4QNxBj-hIHbv-0zyYL8SCEINjZRW73s"
+  linkedin:
+  zhihu:
 
   # Academic websites
   arxiv            : # URL - Update with the correct link to your profile
