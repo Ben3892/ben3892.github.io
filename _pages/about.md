@@ -8,7 +8,7 @@ author_profile: true
   <p class="home-intro__eyebrow">LLM SYSTEMS · DISTILLATION · HIGH-PERFORMANCE COMPUTING</p>
   <h2 id="home-intro-title" class="home-intro__title">让大模型训练更高效、更可靠。</h2>
   <p class="home-intro__lead">
-    我目前专注于大语言模型训练、知识蒸馏、分布式训练系统，以及 CUDA / Triton 高性能算子优化。
+    我目前专注于大语言模型预训练、知识蒸馏、大模型预训练/中训练数据合成/过滤以及数据-评估闭环，以及 CUDA / Triton 高性能算子优化。
   </p>
   <div class="home-intro__actions">
     <a class="btn btn--primary" href="{{ site.baseurl }}/publications/">查看论文</a>
@@ -22,11 +22,13 @@ author_profile: true
     <h2 id="about-heading">关于我</h2>
   </div>
   <p>
+    2025.8 - 至今
     我在百度从事大模型训练与系统优化相关工作，关注如何通过算法与系统协同提升训练效率、模型质量和工程可用性。
   </p>
   <p class="content-placeholder">
-    【待填写：用 2–3 句话补充教育背景、此前经历，以及你最希望解决的研究或工程问题。】
-  </p>
+    2024.7 - 2025.2 我在字节跳动飞书搜索团队从事企业知识问答模型的sft训练与优化。
+    我关注如何通过sft训练提升模型在企业知识问答任务上的性能，以及如何优化模型的推理效率。
+     </p>
 </section>
 
 <section class="home-section" aria-labelledby="research-heading">
@@ -72,16 +74,16 @@ author_profile: true
     </article>
     <article class="work-card">
       <p class="work-card__type">PAPER / PROJECT</p>
-      <h3>【待填写：代表论文或项目名称】</h3>
-      <p>【待填写：一句话说明问题、你的核心贡献和结果。】</p>
-      <p class="work-card__links">【待填写：论文 / 代码 / 项目主页链接】</p>
+      <h3>Let the Data Decide: Supervision Analysis, Capability Trade-offs, and Adaptive Objective Routing in Continued Pre-Training via Off-Policy Distillation</h3>
+      <p>主导项目，idea、实验设计、实现以及评估</p>
+      <p class="work-card__links">https://arxiv.org/abs/2607.16246</p>
     </article>
-    <article class="work-card">
+    <!-- <article class="work-card">
       <p class="work-card__type">OPEN SOURCE</p>
       <h3>【待填写：代表性开源工作】</h3>
       <p>【待填写：说明项目用途、技术特点和可量化效果。】</p>
       <p class="work-card__links">【待填写：GitHub / 文档链接】</p>
-    </article>
+    </article> -->
   </div>
 </section>
 
@@ -91,11 +93,11 @@ author_profile: true
       <p class="section-heading__index">04</p>
       <h2>最新动态</h2>
     </div>
-    <ul class="timeline-list">
+    <!-- <ul class="timeline-list">
       <li><time>【待填写：YYYY-MM】</time><span>【待填写：论文录用、项目发布、演讲或工作动态】</span></li>
       <li><time>【待填写：YYYY-MM】</time><span>【待填写：第二条真实动态】</span></li>
       <li><time>【待填写：YYYY-MM】</time><span>【待填写：第三条真实动态】</span></li>
-    </ul>
+    </ul> -->
   </div>
 
   <div>
