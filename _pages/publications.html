@@ -5,38 +5,23 @@ permalink: /publications/
 author_profile: true
 ---
 
-<p class="archive-intro">这里汇总论文、技术报告和研究型开源工作。</p>
+<div class="listing-page listing-page--publications">
+  <header class="listing-header">
+    <p class="listing-kicker">PUBLICATIONS & RESEARCH</p>
+    <p class="archive-intro">这里汇总论文、预印本和研究型开源工作。</p>
+    {% if site.author.googlescholar %}
+      <p><a href="{{ site.author.googlescholar }}" target="_blank" rel="noopener noreferrer">访问 Google Scholar <span aria-hidden="true">↗</span></a></p>
+    {% endif %}
+  </header>
 
-{% if site.author.googlescholar %}
-  <p><a href="{{ site.author.googlescholar }}">访问 Google Scholar 主页 <span aria-hidden="true">→</span></a></p>
-{% endif %}
-
-{% assign visible_publications = site.publications | where_exp: "post", "post.published != false" %}
-{% assign publication_count = visible_publications | size %}
-{% if publication_count > 0 %}
-  {% include base_path %}
-  {% if site.publication_category %}
-    {% for category in site.publication_category %}
-      {% assign title_shown = false %}
-      {% for post in visible_publications reversed %}
-        {% if post.category != category[0] %}
-          {% continue %}
-        {% endif %}
-        {% unless title_shown %}
-          <h2>{{ category[1].title }}</h2>
-          {% assign title_shown = true %}
-        {% endunless %}
-        {% include archive-single.html %}
+  {% assign visible_publications = site.publications | where_exp: "post", "post.published != false" | sort: "order" %}
+  {% if visible_publications.size > 0 %}
+    <div class="project-grid">
+      {% for post in visible_publications %}
+        {% include project-card.html post=post %}
       {% endfor %}
-    {% endfor %}
+    </div>
   {% else %}
-    {% for post in visible_publications reversed %}
-      {% include archive-single.html %}
-    {% endfor %}
+    <div class="empty-state"><strong>研究成果正在整理中</strong><p>论文与技术报告会在公开后补充到这里。</p></div>
   {% endif %}
-{% else %}
-  <div class="empty-state">
-    <strong>【待填写：论文列表】</strong><br>
-    在 <code>_publications/</code> 中添加真实论文，并填写标题、作者、会议或期刊、年份、摘要和链接。
-  </div>
-{% endif %}
+</div>

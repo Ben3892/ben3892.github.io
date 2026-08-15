@@ -1,17 +1,25 @@
 ---
 layout: archive
-title: "Talks and presentations"
-published: false
+title: "分享与演讲"
 permalink: /talks/
 author_profile: true
 ---
 
-{% if site.talkmap_link == true %}
+<div class="listing-page">
+  <header class="listing-header">
+    <p class="listing-kicker">TALKS & PRESENTATIONS</p>
+    <p class="archive-intro">记录公开分享、技术演讲与学术交流。</p>
+  </header>
 
-<p style="text-decoration:underline;"><a href="/talkmap.html">See a map of all the places I've given a talk!</a></p>
-
-{% endif %}
-
-{% for post in site.talks reversed %}
-  {% include archive-single-talk.html %}
-{% endfor %}
+  {% assign visible_talks = site.talks | where_exp: "post", "post.published != false" | sort: "date" | reverse %}
+  {% if visible_talks.size > 0 %}
+    <div class="content-timeline">
+      {% for post in visible_talks %}
+        {% include timeline-card.html post=post %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state"><strong>演讲内容正在整理中</strong><p>公开分享与演讲资料会在确认后发布。</p></div>
+    <!-- 维护提示：在 _talks/ 中添加或公开演讲条目。 -->
+  {% endif %}
+</div>

@@ -1,13 +1,25 @@
 ---
 layout: archive
-title: "Teaching"
-published: false
+title: "教学经历"
 permalink: /teaching/
 author_profile: true
 ---
 
-{% include base_path %}
+<div class="listing-page">
+  <header class="listing-header">
+    <p class="listing-kicker">TEACHING</p>
+    <p class="archive-intro">记录课程教学、助教、工作坊与知识分享经历。</p>
+  </header>
 
-{% for post in site.teaching reversed %}
-  {% include archive-single.html %}
-{% endfor %}
+  {% assign visible_teaching = site.teaching | where_exp: "post", "post.published != false" | sort: "date" | reverse %}
+  {% if visible_teaching.size > 0 %}
+    <div class="content-timeline">
+      {% for post in visible_teaching %}
+        {% include timeline-card.html post=post %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state"><strong>教学内容正在整理中</strong><p>课程、工作坊和分享材料会在确认后发布。</p></div>
+    <!-- 维护提示：在 _teaching/ 中添加或公开教学条目。 -->
+  {% endif %}
+</div>

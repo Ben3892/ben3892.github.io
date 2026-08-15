@@ -1,6 +1,7 @@
 # Ignore the contents of the _site directory and other cache directories
 _site/
 .sass-cache/
+.bundle/
 
 # Ignore the directory for local files during development
 local/
@@ -11,3 +12,6 @@ Gemfile.lock
 # Ingore files created by npm
 node_modules
 package-lock.json
+
+# The site publishes an ASCII-named copy from files/.
+/袁江岸_大模型算法2026_07_20.pdf

@@ -1,0 +1,33 @@
+{% include base_path %}
+{% assign post = include.post %}
+{% assign project_tags = post.stack | default: post.tags %}
+{% assign card_link_label = "查看项目" %}
+{% if post.collection == "publications" %}{% assign card_link_label = "查看论文" %}{% endif %}
+
+<article class="project-card">
+  <div class="project-card__topline">
+    <span>{{ post.project_type | default: post.type | default: "PROJECT" }}</span>
+    {% if post.period %}
+      <span>{{ post.period }}</span>
+    {% elsif post.date %}
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y" }}</time>
+    {% endif %}
+  </div>
+
+  <h2 class="project-card__title">
+    <a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a>
+  </h2>
+  {% if post.role %}<p class="project-card__summary"><strong>{{ post.role }}</strong></p>{% endif %}
+  {% if post.excerpt %}
+    <p class="project-card__summary">{{ post.excerpt | markdownify | strip_html | strip_newlines }}</p>
+  {% endif %}
+
+  <div class="project-card__footer">
+    {% if project_tags and project_tags.size > 0 %}
+      {% for tag in project_tags %}
+        <span class="meta-chip">{{ tag }}</span>
+      {% endfor %}
+    {% endif %}
+    <a href="{{ base_path }}{{ post.url }}" aria-label="{{ card_link_label }}：{{ post.title }}">{{ card_link_label }} <span aria-hidden="true">→</span></a>
+  </div>
+</article>

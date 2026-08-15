@@ -8,11 +8,11 @@ author_profile: true
   <p class="home-intro__eyebrow">LLM SYSTEMS · DISTILLATION · HIGH-PERFORMANCE COMPUTING</p>
   <h2 id="home-intro-title" class="home-intro__title">让大模型训练更高效、更可靠。</h2>
   <p class="home-intro__lead">
-    我目前专注于大语言模型预训练、知识蒸馏、大模型预训练/中训练数据合成/过滤以及数据-评估闭环，以及 CUDA / Triton 高性能算子优化。
+    我目前在百度搜索策略部从事大语言模型预训练与中训练，关注知识蒸馏、训练数据闭环、搜索 Agent，以及 CUDA / Triton 高性能算子优化。
   </p>
   <div class="home-intro__actions">
     <a class="btn btn--primary" href="{{ site.baseurl }}/publications/">查看论文</a>
-    <a class="btn btn--inverse" href="{{ site.baseurl }}/year-archive/">阅读博客</a>
+    <a class="btn btn--inverse" href="{{ site.baseurl }}/blog/">阅读博客</a>
   </div>
 </section>
 
@@ -22,13 +22,11 @@ author_profile: true
     <h2 id="about-heading">关于我</h2>
   </div>
   <p>
-    2025.8 - 至今
-    我在百度从事大模型训练与系统优化相关工作，关注如何通过算法与系统协同提升训练效率、模型质量和工程可用性。
+    2025 年 8 月至今，我在百度参与 100B 级 MoE 搜索大模型的预训练与中训练，主要负责蒸馏目标、数学与代码数据策略、评测归因和搜索 Agent 数据合成。
   </p>
-  <p class="content-placeholder">
-    2024.7 - 2025.2 我在字节跳动飞书搜索团队从事企业知识问答模型的sft训练与优化。
-    我关注如何通过sft训练提升模型在企业知识问答任务上的性能，以及如何优化模型的推理效率。
-     </p>
+  <p>
+    我于香港中文大学（深圳）获得数据科学硕士学位，本科毕业于华南理工大学工业工程专业。此前曾在字节跳动飞书搜索团队从事企业知识问答模型的 SFT 训练与优化。
+  </p>
 </section>
 
 <section class="home-section" aria-labelledby="research-heading">
@@ -67,23 +65,23 @@ author_profile: true
   </div>
   <div class="work-grid">
     <article class="work-card">
-      <p class="work-card__type">PAPER / PROJECT</p>
-      <h3>【待填写：代表论文或项目名称】</h3>
-      <p>【待填写：一句话说明问题、你的核心贡献和结果。】</p>
-      <p class="work-card__links">【待填写：论文 / 代码 / 项目主页链接】</p>
+      <p class="work-card__type">LLM TRAINING</p>
+      <h3>大模型蒸馏目标设计</h3>
+      <p>分析 Forward KL 与 NTP 的领域权衡，并以动态监督策略完成规模化验证；裁剪后模型保留 Teacher 约 92% 的评测能力。</p>
+      <p class="work-card__links"><a href="{{ '/portfolio/llm-distillation-objectives/' | relative_url }}">项目详情 →</a></p>
     </article>
     <article class="work-card">
-      <p class="work-card__type">PAPER / PROJECT</p>
-      <h3>Let the Data Decide: Supervision Analysis, Capability Trade-offs, and Adaptive Objective Routing in Continued Pre-Training via Off-Policy Distillation</h3>
-      <p>主导项目，idea、实验设计、实现以及评估</p>
-      <p class="work-card__links">https://arxiv.org/abs/2607.16246</p>
+      <p class="work-card__type">PREPRINT · 2026</p>
+      <h3>Let the Data Decide</h3>
+      <p>主导研究思路、实验设计、实现与评估，系统研究持续预训练中的监督信号选择、能力权衡与自适应目标路由。</p>
+      <p class="work-card__links"><a href="https://arxiv.org/abs/2607.16246" target="_blank" rel="noopener noreferrer">arXiv ↗</a></p>
     </article>
-    <!-- <article class="work-card">
-      <p class="work-card__type">OPEN SOURCE</p>
-      <h3>【待填写：代表性开源工作】</h3>
-      <p>【待填写：说明项目用途、技术特点和可量化效果。】</p>
-      <p class="work-card__links">【待填写：GitHub / 文档链接】</p>
-    </article> -->
+    <article class="work-card">
+      <p class="work-card__type">DATA & EVALUATION</p>
+      <h3>数学与代码数据质量闭环</h3>
+      <p>构建合成、过滤、沙箱校验与评测归因链路，形成约 70B 有效 Token；代表性实验中 Pass@128 从 0.77 提升至 0.83。</p>
+      <p class="work-card__links"><a href="{{ '/portfolio/math-code-data-pipeline/' | relative_url }}">项目详情 →</a></p>
+    </article>
   </div>
 </section>
 
@@ -93,11 +91,11 @@ author_profile: true
       <p class="section-heading__index">04</p>
       <h2>最新动态</h2>
     </div>
-    <!-- <ul class="timeline-list">
-      <li><time>【待填写：YYYY-MM】</time><span>【待填写：论文录用、项目发布、演讲或工作动态】</span></li>
-      <li><time>【待填写：YYYY-MM】</time><span>【待填写：第二条真实动态】</span></li>
-      <li><time>【待填写：YYYY-MM】</time><span>【待填写：第三条真实动态】</span></li>
-    </ul> -->
+    <ul class="timeline-list">
+      <li><time>2026-07</time><span>预印本 <em>Let the Data Decide</em> 发布于 arXiv。</span></li>
+      <li><time>2025-08</time><span>加入百度搜索策略部，从事大模型预训练与中训练。</span></li>
+      <li><time>2025-07</time><span>获香港中文大学（深圳）数据科学硕士学位。</span></li>
+    </ul>
   </div>
 
   <div>
@@ -116,7 +114,8 @@ author_profile: true
         {% endfor %}
       </ul>
     {% else %}
-      <p class="content-placeholder">【待填写：在 <code>_posts/</code> 中发布第一篇技术博客。】</p>
+      <div class="empty-state">第一篇技术文章正在整理中。</div>
+      <!-- 维护提示：从 _drafts/post-draft.md 复制模板后发布到 _posts/。 -->
     {% endif %}
   </div>
 </section>
@@ -126,7 +125,7 @@ author_profile: true
     <p class="section-heading__index">06</p>
     <h2 id="contact-heading">联系与合作</h2>
     <p>欢迎围绕大模型训练、知识蒸馏、分布式系统和高性能算子进行交流。</p>
-    <p class="content-placeholder">【待填写：希望合作的具体主题，或最适合联系你的方式。】</p>
+    <p>学术讨论、工程实践或潜在合作，都可以通过邮件与我联系。</p>
   </div>
   <div class="contact-panel__actions">
     <a class="btn btn--primary" href="mailto:{{ site.author.email }}">发送邮件</a>

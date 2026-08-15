@@ -5,18 +5,21 @@ permalink: /portfolio/
 author_profile: true
 ---
 
-<p class="archive-intro">这里展示代表性的研究、工程和开源项目。</p>
+<div class="listing-page">
+  <header class="listing-header">
+    <p class="listing-kicker">SELECTED WORK</p>
+    <p class="archive-intro">这里展示代表性的研究、工程和数据项目，重点说明问题、个人贡献与可量化结果。</p>
+  </header>
 
-{% assign visible_portfolio = site.portfolio | where_exp: "post", "post.published != false" %}
-{% assign portfolio_count = visible_portfolio | size %}
-{% if portfolio_count > 0 %}
-  {% include base_path %}
-  {% for post in visible_portfolio %}
-    {% include archive-single.html %}
-  {% endfor %}
-{% else %}
-  <div class="empty-state">
-    <strong>【待填写：项目列表】</strong><br>
-    在 <code>_portfolio/</code> 中添加项目，建议说明问题、个人贡献、技术方案、量化结果和相关链接。
-  </div>
-{% endif %}
+  {% assign visible_portfolio = site.portfolio | where_exp: "post", "post.published != false" | sort: "order" %}
+  {% if visible_portfolio.size > 0 %}
+    <div class="project-grid">
+      {% for post in visible_portfolio %}
+        {% include project-card.html post=post %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state"><strong>项目内容正在整理中</strong><p>已完成的代表工作会陆续补充到这里。</p></div>
+    <!-- 维护提示：在 _portfolio/ 中添加项目，并通过 order 字段控制展示顺序。 -->
+  {% endif %}
+</div>
