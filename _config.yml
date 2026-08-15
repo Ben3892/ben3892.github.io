@@ -13,9 +13,9 @@ title                    : "Ben Yuan"
 title_separator          : "-"
 name                     : &name "Ben (Jiangan) Yuan"
 description              : &description "大模型训练、知识蒸馏与高性能计算研究"
-url                      : https://ben3892.github.io # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io"
-baseurl                  : "/benyuan.github.io" # the subpath of your site, e.g. "/blog"
-repository               : "Ben3892/benyuan.github.io"
+url                      : "https://ben3892.github.io" # the base hostname & protocol for your site e.g. "https://[your GitHub username].github.io"
+baseurl                  : "" # user site is published from the root path
+repository               : "Ben3892/ben3892.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
