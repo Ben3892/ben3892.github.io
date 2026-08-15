@@ -1,36 +1,42 @@
 ---
 layout: archive
-title: "Publications"
+title: "论文与研究成果"
 permalink: /publications/
 author_profile: true
 ---
 
+<p class="archive-intro">这里汇总论文、技术报告和研究型开源工作。</p>
+
 {% if site.author.googlescholar %}
-  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
+  <p><a href="{{ site.author.googlescholar }}">访问 Google Scholar 主页 <span aria-hidden="true">→</span></a></p>
 {% endif %}
 
-{% include base_path %}
-
-<!-- New style rendering if publication categories are defined -->
-{% if site.publication_category %}
-  {% for category in site.publication_category  %}
-    {% assign title_shown = false %}
-    {% for post in site.publications reversed %}
-      {% if post.category != category[0] %}
-        {% continue %}
-      {% endif %}
-      {% unless title_shown %}
-        <h2>{{ category[1].title }}</h2><hr />
-        {% assign title_shown = true %}
-      {% endunless %}
+{% assign visible_publications = site.publications | where_exp: "post", "post.published != false" %}
+{% assign publication_count = visible_publications | size %}
+{% if publication_count > 0 %}
+  {% include base_path %}
+  {% if site.publication_category %}
+    {% for category in site.publication_category %}
+      {% assign title_shown = false %}
+      {% for post in visible_publications reversed %}
+        {% if post.category != category[0] %}
+          {% continue %}
+        {% endif %}
+        {% unless title_shown %}
+          <h2>{{ category[1].title }}</h2>
+          {% assign title_shown = true %}
+        {% endunless %}
+        {% include archive-single.html %}
+      {% endfor %}
+    {% endfor %}
+  {% else %}
+    {% for post in visible_publications reversed %}
       {% include archive-single.html %}
     {% endfor %}
-  {% endfor %}
+  {% endif %}
 {% else %}
-  {% for post in site.publications reversed %}
-    {% include archive-single.html %}
-  {% endfor %}
+  <div class="empty-state">
+    <strong>【待填写：论文列表】</strong><br>
+    在 <code>_publications/</code> 中添加真实论文，并填写标题、作者、会议或期刊、年份、摘要和链接。
+  </div>
 {% endif %}
-
-
-

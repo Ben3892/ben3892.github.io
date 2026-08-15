@@ -1,14 +1,22 @@
 ---
 layout: archive
-title: "Portfolio"
+title: "项目"
 permalink: /portfolio/
 author_profile: true
 ---
 
-{% include base_path %}
+<p class="archive-intro">这里展示代表性的研究、工程和开源项目。</p>
 
-
-{% for post in site.portfolio %}
-  {% include archive-single.html %}
-{% endfor %}
-
+{% assign visible_portfolio = site.portfolio | where_exp: "post", "post.published != false" %}
+{% assign portfolio_count = visible_portfolio | size %}
+{% if portfolio_count > 0 %}
+  {% include base_path %}
+  {% for post in visible_portfolio %}
+    {% include archive-single.html %}
+  {% endfor %}
+{% else %}
+  <div class="empty-state">
+    <strong>【待填写：项目列表】</strong><br>
+    在 <code>_portfolio/</code> 中添加项目，建议说明问题、个人贡献、技术方案、量化结果和相关链接。
+  </div>
+{% endif %}

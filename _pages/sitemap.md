@@ -1,37 +1,49 @@
 ---
 layout: archive
-title: "Sitemap"
+title: "站点地图"
 permalink: /sitemap/
 author_profile: true
 ---
 
 {% include base_path %}
 
-A list of all the posts and pages found on the site. For you robots out there, there is an [XML version]({{ base_path }}/sitemap.xml) available for digesting as well.
+## 主要页面
 
-<h2>Pages</h2>
-{% for post in site.pages %}
-  {% include archive-single.html %}
+<ul>
+{% for link in site.data.navigation.main %}
+  <li><a href="{{ base_path }}{{ link.url }}">{{ link.title }}</a></li>
 {% endfor %}
+</ul>
 
-<h2>Posts</h2>
-{% for post in site.posts %}
-  {% include archive-single.html %}
-{% endfor %}
+{% assign visible_posts = site.posts | where_exp: "post", "post.published != false" %}
+{% if visible_posts.size > 0 %}
+## 博客文章
 
-{% capture written_label %}'None'{% endcapture %}
+<ul>
+{% for post in visible_posts %}
+  <li><a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
 
-{% for collection in site.collections %}
-{% unless collection.output == false or collection.label == "posts" %}
-  {% capture label %}{{ collection.label }}{% endcapture %}
-  {% if label != written_label %}
-  <h2>{{ label }}</h2>
-  {% capture written_label %}{{ label }}{% endcapture %}
-  {% endif %}
-{% endunless %}
-{% for post in collection.docs %}
-  {% unless collection.output == false or collection.label == "posts" %}
-  {% include archive-single.html %}
-  {% endunless %}
+{% assign visible_publications = site.publications | where_exp: "post", "post.published != false" %}
+{% if visible_publications.size > 0 %}
+## 论文
+
+<ul>
+{% for post in visible_publications reversed %}
+  <li><a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a></li>
 {% endfor %}
+</ul>
+{% endif %}
+
+{% assign visible_portfolio = site.portfolio | where_exp: "post", "post.published != false" %}
+{% if visible_portfolio.size > 0 %}
+## 项目
+
+<ul>
+{% for post in visible_portfolio %}
+  <li><a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a></li>
 {% endfor %}
+</ul>
+{% endif %}
