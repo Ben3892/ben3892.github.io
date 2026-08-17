@@ -4,7 +4,7 @@ collection: portfolio
 permalink: /portfolio/math-code-data-pipeline/
 published: true
 order: 2
-period: "2025.08 — 至今"
+period: "2025.08 — 2025.12"
 project_type: "DATA & EVALUATION"
 role: "数据策略 · 质量评测"
 stack:
@@ -22,6 +22,11 @@ read_time: false
 ## 项目背景
 
 大规模训练数据的收益同时受到数量、难度、可执行性与答案一致性的影响。项目目标是把数据生产、过滤、训练评测和错误归因连成可持续迭代的闭环。
+
+
+## 相关研究
+
+
 
 ## 我的工作
 

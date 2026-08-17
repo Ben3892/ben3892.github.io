@@ -2,9 +2,9 @@
 title: "搜索 Agent 多跳推理数据合成"
 collection: portfolio
 permalink: /portfolio/search-agent-data-synthesis/
-published: true
+published: false
 order: 3
-period: "2025.08 — 至今"
+period: "2026.04 — 至今"
 project_type: "SEARCH AGENT"
 role: "数据构造 · 能力拆解"
 stack:
@@ -23,6 +23,9 @@ read_time: false
 ## 项目背景
 
 多跳搜索任务要求模型持续形成查询、定位证据并根据新信息调整推理路径。高质量训练数据需要同时保证检索可达、证据可信和轨迹具有学习价值。
+
+## 相关研究
+
 
 ## 我的工作
 
