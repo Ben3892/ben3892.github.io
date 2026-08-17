@@ -22,9 +22,22 @@ read_time: false
 ## 项目背景
 
 参与 100B 级 MoE 搜索大模型预训练与中训练，围绕模型裁剪后的能力恢复、领域自适应训练以及蒸馏监督信号选择开展实验。
+- 在数据实验中发现Forward KL和NTP loss各自存在不同的优势区间，因此尝试在模型训练中把NTP和Forward KL的优势融合到一个模型里
 
 ## 相关研究
+损失函数的研究
+- reverse kl损失（miniLLM）
+- abkd损失函数
 
+蒸馏超参数的研究（top-k、top-p、temperature、loss）
+- distillation pretraining（智谱）
+  - 
+- distilled pretrain（meta）
+
+业界相关实践
+- gemma2、gemma3
+- slimqwen
+- mistral 3
 
 ## 我的工作
 
