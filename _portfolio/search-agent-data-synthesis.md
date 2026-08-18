@@ -25,13 +25,14 @@ read_time: false
 多跳搜索任务要求模型持续形成查询、定位证据并根据新信息调整推理路径。高质量训练数据需要同时保证检索可达、证据可信和轨迹具有学习价值。
 
 ## 相关研究
-主要是关于query合成的研究
-- scaling agent via mid-training（qwen团队）
-  - 
-- red searcher（xhs团队）
-  - 通过entity之间提取evidence的方式来构建entity到entity之间的关系，通过抽取子图的方式控制query难度。
-- lite searcher
-  - 抽取不同结构的子图控制query的多样性。
+
+本项目重点关注 Agent 能力应在哪个训练阶段注入，以及如何通过结构化采样控制搜索问题的难度与多样性。
+
+- **[Scaling Agents via Continual Pre-training](https://arxiv.org/abs/2509.13310)** 将 Agent 轨迹引入持续预训练阶段，使模型在后训练之前先建立基础的工具使用与多步搜索能力。这一思路支持本项目在 Mid-training 阶段注入搜索轨迹，而不是仅依赖 SFT 学习完整的 Agent 行为。
+- **[REDSearcher: A Scalable and Cost-Efficient Framework for Long-Horizon Search Agents](https://arxiv.org/abs/2602.14234)** 通过图拓扑结构和证据分散度联合控制任务难度，并将知识、规划和函数调用等原子能力前置到 Mid-training。这启发本项目使用实体关系图表示多跳证据链，并通过图上路径采样构造不同难度的问题。
+- **[LiteResearcher: A Scalable Agentic RL Training Framework for Deep Research Agent](https://arxiv.org/abs/2604.17931)** 通过协同构建合成任务与本地网页语料，搭建模拟真实搜索动态的本地 Search/Browse 环境；同时将复杂检索任务概括为直接信息获取、聚合、枚举、交叉验证和统计五类原子搜索能力，再按任务难度组织课程式 RL 训练。这启发本项目在图结构之外，进一步从搜索能力类型与训练难度两个维度控制合成数据的多样性。
+
+基于上述研究，本项目选择“实体图构建—图上路径采样—问题与轨迹合成”的数据路线，并进一步将完整搜索过程拆解为 Query Reformulation、Evidence Grounding 等原子能力，用于分难度组织训练数据与开展细粒度评测。
 
 ## 我的工作
 

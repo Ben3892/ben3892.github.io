@@ -8,7 +8,7 @@ author_profile: true
   <p class="home-intro__eyebrow">LLM SYSTEMS · DISTILLATION · HIGH-PERFORMANCE COMPUTING</p>
   <h2 id="home-intro-title" class="home-intro__title">让大模型训练更高效、更可靠。</h2>
   <p class="home-intro__lead">
-    我目前在百度搜索策略部从事大语言模型预训练与中训练，关注知识蒸馏、训练数据闭环、搜索 Agent，以及 CUDA / Triton 高性能算子优化。
+    我目前在百度搜索策略部从事大语言模型预训练与中训练，关注知识蒸馏、训练数据闭环、search agent mid-training及大模型可解释性问题。
   </p>
   <div class="home-intro__actions">
     <a class="btn btn--primary" href="{{ site.baseurl }}/publications/">查看论文</a>
@@ -25,7 +25,7 @@ author_profile: true
     2025 年 8 月至今，我在百度参与 100B 级 MoE 搜索大模型的预训练与中训练，主要负责蒸馏目标、数学与代码数据策略、评测归因和搜索 Agent 数据合成。
   </p>
   <p>
-    我于香港中文大学（深圳）获得数据科学硕士学位，本科毕业于华南理工大学工业工程专业。此前曾在字节跳动飞书搜索团队从事企业知识问答模型的 SFT 训练与优化。
+    我于cuhksz获得ds master学位，本科毕业于华南理工大学。此前曾在字节跳动飞书搜索团队从事企业知识问答模型的 SFT 训练与优化。
   </p>
 </section>
 
@@ -50,11 +50,6 @@ author_profile: true
       <h3>Distributed Systems</h3>
       <p>分布式训练、并行策略，以及大规模训练系统性能优化。</p>
     </article>
-    <article class="interest-card">
-      <p class="interest-card__number">04</p>
-      <h3>CUDA / Triton Kernels</h3>
-      <p>训练关键算子的融合、显存优化与硬件效率提升。</p>
-    </article>
   </div>
 </section>
 
@@ -67,7 +62,7 @@ author_profile: true
     <article class="work-card">
       <p class="work-card__type">LLM TRAINING</p>
       <h3>大模型蒸馏目标设计</h3>
-      <p>分析 Forward KL 与 NTP 的领域权衡，并以动态监督策略完成规模化验证；裁剪后模型保留 Teacher 约 92% 的评测能力。</p>
+      <p>分析 Forward KL 与 NTP 的领域权衡，并以动态监督策略完成规模化验证</p>
       <p class="work-card__links"><a href="{{ '/portfolio/llm-distillation-objectives/' | relative_url }}">项目详情 →</a></p>
     </article>
     <article class="work-card">
@@ -79,7 +74,7 @@ author_profile: true
     <article class="work-card">
       <p class="work-card__type">DATA & EVALUATION</p>
       <h3>数学与代码数据质量闭环</h3>
-      <p>构建合成、过滤、沙箱校验与评测归因链路，形成约 70B 有效 Token；代表性实验中 Pass@128 从 0.77 提升至 0.83。</p>
+      <p>构建合成、过滤、沙箱校验与评测归因，提升pass@k、薄弱领域以及容易看见的错误</p>
       <p class="work-card__links"><a href="{{ '/portfolio/math-code-data-pipeline/' | relative_url }}">项目详情 →</a></p>
     </article>
   </div>
@@ -94,7 +89,9 @@ author_profile: true
     <ul class="timeline-list">
       <li><time>2026-07</time><span>预印本 <em>Let the Data Decide</em> 发布于 arXiv。</span></li>
       <li><time>2025-08</time><span>加入百度搜索策略部，从事大模型预训练与中训练。</span></li>
-      <li><time>2025-07</time><span>获香港中文大学（深圳）数据科学硕士学位。</span></li>
+      <li><time>2025-07</time><span>获cuhksz data
+       science master</span></li>
+      <li><time>2023-07</time><span>获华南理工大学学士学位</span></li>
     </ul>
   </div>
 
@@ -124,7 +121,7 @@ author_profile: true
   <div>
     <p class="section-heading__index">06</p>
     <h2 id="contact-heading">联系与合作</h2>
-    <p>欢迎围绕大模型训练、知识蒸馏、分布式系统和高性能算子进行交流。</p>
+    <p>欢迎围绕大模型训练、知识蒸馏、预训练数据、大模型可解释性进行交流。</p>
     <p>学术讨论、工程实践或潜在合作，都可以通过邮件与我联系。</p>
   </div>
   <div class="contact-panel__actions">

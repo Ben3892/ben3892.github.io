@@ -25,26 +25,28 @@ read_time: false
 - 在数据实验中发现Forward KL和NTP loss各自存在不同的优势区间，因此尝试在模型训练中把NTP和Forward KL的优势融合到一个模型里
 
 ## 相关研究
-损失函数的研究
-- reverse kl损失（miniLLM）
-  - 使用opd的方式（student rollout出trajectory，teacher在student的trajectory上生成logits供student学习，使用rkl作为损失函数）训练模型
-- abkd损失函数
-  - 开发一个蒸馏loss，融合forward-kl、reverse-kl等模式训练模型，但是有2个超参数需要调
-- jsd loss
-  - student学习student和teacher的logits平均值，降低teacher-student capacity gap的问题。
-- sparse logits sampling
-  - 重采样teacher logits，降低存储成本以及提供更真实的logits给student学习
 
-蒸馏超参数的研究（top-k、top-p、temperature、loss）
-- distillation pretraining（智谱）
-  - 单点探索各种蒸馏超参数的最优设置，然后组合单点最优设置到正式训练
-- distilled pretrain（meta）
-  - 探索蒸馏对pass@k、不同领域的影响，提出蒸馏可能损害in-context learning，通过case study提出entropy based token routing策略训练模型，结果能保护蒸馏的in-context learning benchmark分数
+本项目从训练目标、蒸馏配置和数据选择三个维度梳理现有方法，并据此确定实验优先级。
 
-业界相关实践
-- gemma 2、gemma 3
-- slimqwen
-- mistral 3
+### 训练目标
+
+- **[MiniLLM: Knowledge Distillation of Large Language Models](https://arxiv.org/abs/2306.08543)** 使用 Reverse KL 进行生成式语言模型蒸馏：由 Student 生成轨迹，再由 Teacher 在同一轨迹上提供分布监督。这表明蒸馏目标与训练数据的采样分布需要联合设计。
+- **[ABKD: Pursuing a Proper Allocation of the Probability Mass in Knowledge Distillation via α-β-Divergence](https://arxiv.org/abs/2505.04560)** 通过 α-β Divergence 在 Forward KL 与 Reverse KL 的概率质量分配特性之间进行连续调节，扩展了损失函数的设计空间，但也额外引入了需要搜索的超参数。
+- **Jensen–Shannon Divergence（JSD）** 以 Teacher 和 Student 输出概率分布的混合分布为中介，以更对称的方式约束两者差异，为缓解 Teacher–Student Capacity Gap 提供了另一种目标设计思路。
+- **[Sparse Logit Sampling: Accelerating Knowledge Distillation in LLMs](https://arxiv.org/abs/2503.16870)** 通过重要性采样构造 Teacher 分布的无偏梯度估计，在尽量保留蒸馏信号的同时，降低离线 Logits 的存储与训练成本。
+
+这些工作共同扩展了蒸馏目标的设计空间。综合考虑训练稳定性、超参数数量和规模化成本后，本项目优先验证 Forward KL、NTP 及二者的组合方式。
+
+### 蒸馏配置
+
+- **[Pre-training Distillation for Large Language Models: A Design Space Exploration](https://arxiv.org/abs/2410.16215)** 系统考察了 Logits 处理、损失函数、Scaling Law 以及离线/在线 Logits 等设计维度，为本项目利用代理模型搜索 Top-k、Temperature 和 Loss Weight 等配置提供了方法参考。
+- **[Distilled Pretraining: A Modern Lens of Data, In-Context Learning and Test-Time Scaling](https://arxiv.org/abs/2509.01649)** 分析了蒸馏对 Pass@k、Test-time Scaling 和 In-context Learning 的影响，并尝试在 Teacher 输出的低熵 Token 上关闭蒸馏损失、回退到 NTP 监督。该 Token Routing 方案直接构成了本项目细粒度路由实验的对照方向。
+
+### 数据选择
+
+- **[MiniPLM: Knowledge Distillation for Pre-Training Language Models](https://arxiv.org/abs/2410.17215)** 使用 Teacher 与小型 Reference Model 对完整序列的概率差异进行 Difference Sampling：上采样 Teacher 更偏好、但 Reference Model 认为较难的数据，下采样常见易学模式，并剔除噪声样本。这表明除了损失函数，数据分布本身也可以作为蒸馏优化的控制轴。
+
+基于上述调研，本项目依次验证了蒸馏超参数、Token 级路由信号与数据域级目标选择，并重点考察不同方案能否从代理实验稳定扩展到目标模型。
 
 ## 我的工作
 
