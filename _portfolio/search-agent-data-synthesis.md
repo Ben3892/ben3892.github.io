@@ -25,14 +25,20 @@ read_time: false
 多跳搜索任务要求模型持续形成查询、定位证据并根据新信息调整推理路径。高质量训练数据需要同时保证检索可达、证据可信和轨迹具有学习价值。
 
 ## 相关研究
-
+主要是关于query合成的研究
+- scaling agent via mid-training（qwen团队）
+  - 
+- red searcher（xhs团队）
+  - 通过entity之间提取evidence的方式来构建entity到entity之间的关系，通过抽取子图的方式控制query难度。
+- lite searcher
+  - 抽取不同结构的子图控制query的多样性。
 
 ## 我的工作
 
-- 基于 Wikipedia 构建离线检索系统，组合 BM25、Qwen3 Embedding 与重排模型。
+- 基于 Wikipedia 构建离线检索系统，组合 BM25、Qwen3 Embedding 与Re-ranker模型。
 - 从文档中抽取实体，通过页面链接与随机游走构建实体图，再使用 LLM 合成问题和搜索轨迹。
-- 将 Agent 能力拆分为查询改写、证据定位等子能力，通过召回率控制样本质量，并采用课程式中训练组织不同难度数据。
-- 使用 BrowserComp 等评测分析能力变化，将结果反馈到数据生成策略。
+- 标注trajectory中不同entity以及hidden state的状态，将 Agent trajectory的过程为evidence grounding、query reformulation等原子能力，构建不同类型的原子能力数据，并采用课程式中训练组织不同难度数据。
+- 自建原子能力benchmark评估mid-training训练效果，并接入后训练sft使用browsecomp评估集评估在线search agent能力。
 
 ## 结果
 
