@@ -37,7 +37,7 @@ read_time: false
 
 #### 公式分析：KL 方向
 
-令 \(x\) 表示某个 Token 之前的上下文，\(\mathcal{V}\) 表示词表，\(p_T(v\mid x)\) 和 \(p_S(v\mid x)\) 分别表示 Teacher 与 Student 对下一个 Token \(v\) 的概率分布。在固定上下文上，两种 Token-level KL 目标可写为：
+令 \\(x\\) 表示某个 Token 之前的上下文，\\(\mathcal{V}\\) 表示词表，\\(p_T(v\mid x)\\) 和 \\(p_S(v\mid x)\\) 分别表示 Teacher 与 Student 对下一个 Token \\(v\\) 的概率分布。在固定上下文上，两种 Token-level KL 目标可写为：
 
 $$
 \mathcal{L}_{\mathrm{FKL}}(x)
@@ -68,7 +68,7 @@ $$
 
 ### 与本项目的联系：领域级目标路由
 
-令 \(d(x)\) 表示样本所属领域，\(y=(y_1,\ldots,y_n)\) 表示目标 Token 序列。NTP 损失定义为：
+令 \\(d(x)\\) 表示样本所属领域，\\(y=(y_1,\ldots,y_n)\\) 表示目标 Token 序列。NTP 损失定义为：
 
 $$
 \mathcal{L}_{\mathrm{NTP}}(x,y)
@@ -85,7 +85,7 @@ $$
 \qquad \lambda_d\in\{0,1\}
 $$
 
-其中 \(\lambda_d\) 是领域 \(d\) 的固定目标开关，而不是由模型动态学习的路由权重。在当前实验中，General/STEM 使用 \(\lambda_d=1\)，Math/Code 使用 \(\lambda_d=0\)。该形式化直接表达了“按数据域路由监督目标”的核心思路。
+其中 \\(\lambda_d\\) 是领域 \\(d\\) 的固定目标开关，而不是由模型动态学习的路由权重。在当前实验中，General/STEM 使用 \\(\lambda_d=1\\)，Math/Code 使用 \\(\lambda_d=0\\)。该形式化直接表达了“按数据域路由监督目标”的核心思路。
 
 ## 我的工作
 
