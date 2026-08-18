@@ -34,6 +34,21 @@ read_time: false
 
 基于上述研究，本项目选择“实体图构建—图上路径采样—问题与轨迹合成”的数据路线，并进一步将完整搜索过程拆解为 Query Reformulation、Evidence Grounding 等原子能力，用于分难度组织训练数据与开展细粒度评测。
 
+### 与本项目的联系：图上数据合成
+
+令 \(G=(V,E)\) 表示由实体及其关系构成的图，\(\mathcal{D}_{\pi}\) 表示路径中实体对应的文档与证据，则项目中的数据合成过程可概念化为：
+
+$$
+\pi \sim p_{\mathrm{RW}}\!\left(\,\cdot\mid G\,\right)
+$$
+
+$$
+(q,\tau)
+\sim p_{\phi}\!\left(\,\cdot\mid\pi,\mathcal{D}_{\pi}\,\right)
+$$
+
+其中 \(p_{\mathrm{RW}}\) 是图上的路径采样分布，\(\pi\) 是采样得到的多跳实体路径，\(p_{\phi}\) 是用于数据合成的 LLM，\(q\) 是基于路径与证据合成的问题，\(\tau\) 是相应的搜索与推理轨迹。该形式化是对工程流程的概念抽象，将“图上采样”与“基于证据的 LLM 轨迹合成”两个阶段清晰地分离开。
+
 ## 我的工作
 
 - 基于 Wikipedia 构建离线检索系统，组合 BM25、Qwen3 Embedding 与Re-ranker模型。

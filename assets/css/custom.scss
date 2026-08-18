@@ -1295,6 +1295,16 @@ a.resume-chip:focus-visible {
   }
 }
 
+/* Keep display equations readable without widening project pages on mobile. */
+.page__content mjx-container[display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.25rem;
+  -webkit-overflow-scrolling: touch;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

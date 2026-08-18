@@ -35,6 +35,24 @@ read_time: false
 - **Jensen–Shannon Divergence（JSD）** 以 Teacher 和 Student 输出概率分布的混合分布为中介，以更对称的方式约束两者差异，为缓解 Teacher–Student Capacity Gap 提供了另一种目标设计思路。
 - **[Sparse Logit Sampling: Accelerating Knowledge Distillation in LLMs](https://arxiv.org/abs/2503.16870)** 通过重要性采样构造 Teacher 分布的无偏梯度估计，在尽量保留蒸馏信号的同时，降低离线 Logits 的存储与训练成本。
 
+#### 公式分析：KL 方向
+
+令 \(x\) 表示某个 Token 之前的上下文，\(\mathcal{V}\) 表示词表，\(p_T(v\mid x)\) 和 \(p_S(v\mid x)\) 分别表示 Teacher 与 Student 对下一个 Token \(v\) 的概率分布。在固定上下文上，两种 Token-level KL 目标可写为：
+
+$$
+\mathcal{L}_{\mathrm{FKL}}(x)
+= \sum_{v\in\mathcal{V}} p_T(v\mid x)
+\log\frac{p_T(v\mid x)}{p_S(v\mid x)}
+$$
+
+$$
+\mathcal{L}_{\mathrm{RKL}}(x)
+= \sum_{v\in\mathcal{V}} p_S(v\mid x)
+\log\frac{p_S(v\mid x)}{p_T(v\mid x)}
+$$
+
+两者的差异不只是书写顺序：Forward KL 在 Teacher 分布下取期望，更强调覆盖 Teacher 认为重要的概率质量；Reverse KL 在 Student 分布下取期望，更聚焦于 Student 实际访问的高概率区域。上式描述的是固定上下文上的分布差异；在 MiniLLM 的 On-policy 设定中，这些上下文来自 Student 自身生成的轨迹。这也说明了为什么需要同时考察损失方向、采样分布与不同数据域上的能力收益。
+
 这些工作共同扩展了蒸馏目标的设计空间。综合考虑训练稳定性、超参数数量和规模化成本后，本项目优先验证 Forward KL、NTP 及二者的组合方式。
 
 ### 蒸馏配置
@@ -47,6 +65,27 @@ read_time: false
 - **[MiniPLM: Knowledge Distillation for Pre-Training Language Models](https://arxiv.org/abs/2410.17215)** 使用 Teacher 与小型 Reference Model 对完整序列的概率差异进行 Difference Sampling：上采样 Teacher 更偏好、但 Reference Model 认为较难的数据，下采样常见易学模式，并剔除噪声样本。这表明除了损失函数，数据分布本身也可以作为蒸馏优化的控制轴。
 
 基于上述调研，本项目依次验证了蒸馏超参数、Token 级路由信号与数据域级目标选择，并重点考察不同方案能否从代理实验稳定扩展到目标模型。
+
+### 与本项目的联系：领域级目标路由
+
+令 \(d(x)\) 表示样本所属领域，\(y=(y_1,\ldots,y_n)\) 表示目标 Token 序列。NTP 损失定义为：
+
+$$
+\mathcal{L}_{\mathrm{NTP}}(x,y)
+= -\frac{1}{n}\sum_{t=1}^{n}
+\log p_S\!\left(y_t\mid x,y_{<t}\right)
+$$
+
+在 Forward KL 与 NTP 均按有效 Token 数取平均的约定下，领域级训练目标可统一表示为：
+
+$$
+\mathcal{L}(x,y)
+= \lambda_{d(x)}\mathcal{L}_{\mathrm{FKL}}(x)
++ \left(1-\lambda_{d(x)}\right)\mathcal{L}_{\mathrm{NTP}}(x,y),
+\qquad \lambda_d\in\{0,1\}
+$$
+
+其中 \(\lambda_d\) 是领域 \(d\) 的固定目标开关，而不是由模型动态学习的路由权重。在当前实验中，General/STEM 使用 \(\lambda_d=1\)，Math/Code 使用 \(\lambda_d=0\)。该形式化直接表达了“按数据域路由监督目标”的核心思路。
 
 ## 我的工作
 
