@@ -52,7 +52,8 @@ read_time: false
 - 对不同领域、Top-k、Temperature、loss比例开展系统消融，定位 Forward KL 与 NTP 在不同能力维度上的收益差异。
 - 发现Forward KL和NTP loss各自存在不同的优势区间，因此探索在不同数据上使用不同的loss训练模型是否可以同时获得各自的优势区间，最后结果是在general、stem上只使用Forward-KL loss；在math、code上只使用NTP loss能同时获得Forward KL和NTP loss的优势
 - 失败的一些尝试：希望能找到一个sign来知道数据应该选择使用NTP loss还是使用Forward KL loss，使用meta提出的根据teacher entropy来routing loss，低于teacher entropy使用NTP loss，高于teacher entropy使用Forward KL loss发现和纯Forward KL loss持平。使用teacher loss作为routing同样不能获得NTP loss的优势部分。因此，可能不能使用细粒度的sign作为routing标志，更合适的方式是使用粗粒度的sign（例如数据所属领域）
-- 更广义的问题定义：如果
+- 更广义的问题定义：如果说不同的数据领域最好使用不同的loss，那么上述例子只是一个特例，更一般的问题描述是：对于每一个数据领域，如何找到最优超参来让模型收敛更快？定义收敛更快的指标是validataion loss。
+  - 做法：定义一个总的validation loss，蒸馏超参数topk、temperature、lm loss weight。grid search出不同数据领域不同组数的实验组（temperature*3, top-k * 3, lm loss weight *3, data field * 4），一共4*3个输入参数，108个实验组，使用1B 模型进行实验并预测出固定token下的validation loss，进行拟合得到最优解（linear regression、random forest、xgboost）。发现math/code实际上可以设置蒸馏超参为topk=4，temperature=1，优于上述结果。
 
 ## 结果
 
