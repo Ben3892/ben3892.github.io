@@ -2,7 +2,7 @@
 title: "搜索 Agent 多跳推理数据合成"
 collection: portfolio
 permalink: /portfolio/search-agent-data-synthesis/
-published: false
+published: true
 order: 3
 period: "2026.04 — 至今"
 project_type: "SEARCH AGENT"
