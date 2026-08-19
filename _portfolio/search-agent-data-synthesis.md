@@ -52,8 +52,15 @@ $$
 ## 我的工作
 
 - 基于 Wikipedia 构建离线检索系统，组合 BM25、Qwen3 Embedding 与Re-ranker模型。
-- 从文档中抽取实体，通过页面链接与随机游走构建实体图，再使用 LLM 合成问题和搜索轨迹。
+- 从文档中抽取实体，通过页面链接与llm标注entity与entity的关系构建实体图，再使用 LLM 合成问题和搜索轨迹。
 - 标注trajectory中不同entity以及hidden state的状态，将 Agent trajectory的过程为evidence grounding、query reformulation等原子能力，构建不同类型的原子能力数据，并采用课程式中训练组织不同难度数据。
+  - hidden state标注：例如对于某对entity-entity的关系，会标注null、hypothesis、commit、reject等状态。
+  - 原子任务：
+    - 1. belief state classification：给模型context、question以及previous beliefs，让模型回答当前的entity到entity的关系是什么
+    - 2. 提取状态转移：null/hypothesis -> commit，对于entity，只提供上下文，要求模型根据surface clues回答这个entity是什么
+    - 3. 提取状态转移：hypothesis->commit/reject，提供context、entity的匿名描述，提问模型每个entity的状态是什么（verified、unverified、reject）
+    - 4. next focus: 把context压缩成自然语言（已确认的entity、假设、未确认部分），让模型回答下一步的搜索candidates（自然语言描述）
+    - 5. query formulation：把context压缩成自然语言（已确认的entity、假设、未确认部分），让模型回答下一步应该搜索什么query，使用recall评价生成的query
 - 自建原子能力benchmark评估mid-training训练效果，并接入后训练sft使用browsecomp评估集评估在线search agent能力。
 
 ## 结果
