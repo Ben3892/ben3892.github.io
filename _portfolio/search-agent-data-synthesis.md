@@ -4,7 +4,7 @@ collection: portfolio
 permalink: /portfolio/search-agent-data-synthesis/
 published: true
 order: 3
-period: "2026.04 — 至今"
+period: "2026.06 — 至今"
 project_type: "SEARCH AGENT"
 role: "数据构造 · 能力拆解"
 stack:

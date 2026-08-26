@@ -180,13 +180,21 @@ s(\mathbf{x})
 \end{aligned}
 $$
 
-排除用于训练 Reference Model 的语料 \\(\mathcal{D}_{\mathrm{ref}}\\) 后，令 \\(\operatorname{rank}_s(\mathbf{x})\\) 表示样本在候选集 \\(\mathcal{D}\setminus\mathcal{D}_{\mathrm{ref}}\\) 中按 \\(s\\) 从高到低的排序位置，\\(K_{\mathrm{data}}\\) 表示需要选取的样本数。Difference Sampling 得到：
+先排除用于训练 Reference Model 的语料，剩余样本构成候选集：
+
+$$
+\mathcal{D}_{\mathrm{cand}}
+=
+\mathcal{D}\setminus\mathcal{D}_{\mathrm{ref}}.
+$$
+
+随后按照上述得分从高到低排列，并保留预定数量的样本。Difference Sampling 得到：
 
 $$
 \mathcal{D}'
 =
 \left\{
-\mathbf{x}\in\mathcal{D}\setminus\mathcal{D}_{\mathrm{ref}}
+\mathbf{x}\in\mathcal{D}_{\mathrm{cand}}
 \;\middle|\;
 \operatorname{rank}_s(\mathbf{x})\leq K_{\mathrm{data}}
 \right\}.
