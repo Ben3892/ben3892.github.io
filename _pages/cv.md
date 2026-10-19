@@ -101,7 +101,7 @@ redirect_from:
         <div class="resume-entry__header">
           <div>
             <h3 class="resume-entry__title">华南理工大学</h3>
-            <p class="resume-entry__role">工业工程 · 本科（全日制）</p>
+            <p class="resume-entry__role">本科（全日制）</p>
           </div>
           <time class="resume-entry__period">2019.09 — 2023.07</time>
         </div>
