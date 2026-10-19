@@ -19,7 +19,7 @@ redirect_from:
     <div class="resume-hero__top">
       <div class="resume-hero__identity">
         <h2 class="resume-hero__name">
-          袁江岸 <span class="resume-hero__english-name">Ben Yuan</span>
+          ben yuan <span class="resume-hero__english-name">Ben Yuan</span>
         </h2>
         <p class="resume-hero__role">大模型算法工程师 · LLM Training / Distillation / Data</p>
       </div>
